@@ -1,16 +1,7 @@
 'use strict';
 
-let money,
-    time,
-    good1,
-    good2,
-    cost1,
-    cost2,
-    monthBalance,
-    daylyExpenses;
-
-money = +prompt("Ваш бюджет на месяц, руб.");
-time = prompt("Введите дату в формате YYYY-MM-DD");
+let money = +prompt("Ваш бюджет на месяц, руб."),
+    time = prompt("Введите дату в формате YYYY-MM-DD");
 
 let appData = {
     budget: money,
@@ -21,15 +12,57 @@ let appData = {
     savings: false
 };
 
-good1 = prompt("Введите обязательную статью расходов в этом месяце");
-cost1 = +prompt("Во сколько обойдется?");
-good2 = prompt("Введите обязательную статью расходов в этом месяце");
-cost2 = +prompt("Во сколько обойдется?");
+// let i = 1;
+// while (i < 3) {
+//     let good = prompt("Введите обязательную статью расходов в этом месяце №" + i),
+//         cost = +prompt("Во сколько обойдется?");
 
-appData.expenses.good1 = cost1;
-appData.expenses.good2 = cost2;
+//     if ( (typeof(good)) === 'string' && (typeof(good)) != null && (typeof(cost)) !=0 && good != '' && cost != '' && good.length < 50 ) {
+//         console.log("done");
+//         appData.expenses[good] = cost;
+//         i++;
+//     } else {
+//         alert("Вы допустили ошибку. Начните заново!");
+//     }
+// }
 
-monthBalance = appData.budget - (appData.expenses.good1 + appData.expenses.good2);
-daylyExpenses = monthBalance / 30;
+// do {
+//     let good = prompt("Введите обязательную статью расходов в этом месяце №" + i),
+//         cost = +prompt("Во сколько обойдется?");
 
-alert("Ваш ежедневный бюджет: " + daylyExpenses + "руб.");
+//     if ( (typeof(good)) === 'string' && (typeof(good)) != null && (typeof(cost)) !=0 && good != '' && cost != '' && good.length < 50 ) {
+//         console.log("done");
+//         appData.expenses[good] = cost;
+//         i++;
+//     } else {
+//         alert("Вы допустили ошибку. Начните заново!");
+//     }
+// } while (i < 3)
+
+for (let i = 1; i < 3; i++) {
+    let good = prompt("Введите обязательную статью расходов в этом месяце №" + i),
+        cost = +prompt("Во сколько обойдется?");
+
+    if ( (typeof(good)) === 'string' && (typeof(good)) != null && (typeof(cost)) !=0 && good != '' && cost != '' && good.length < 50 ) {
+        console.log("done");
+        appData.expenses[good] = cost;
+    } else {
+        alert("Вы допустили ошибку. Начните заново!");
+        i--;
+        continue
+    }
+}
+
+appData.moneyPerDay = appData.budget / 30;
+
+alert("Ваш ежедневный бюджет: " + appData.moneyPerDay + "руб.");
+
+if (appData.moneyPerDay < 100) {
+    console.log("Минимальный уровень достатка");
+} else if (appData.moneyPerDay > 100 && appData.moneyPerDay < 2000) {
+    console.log("Средний уровень достатка");
+} else if (appData.moneyPerDay > 2000) {
+    console.log("Высокий уровень достатка");
+} else {
+    console.log("Произошла ошибка");
+}
